@@ -3,7 +3,7 @@ on:
   # but only for the main branch
   push:
     branches:
-      - emcc
+      - pipeline
 name: CI
 jobs:
   test:
@@ -13,14 +13,14 @@ jobs:
         platform: [ubuntu-18.04, macos-10.15]
     runs-on: ${{ matrix.platform }}
     steps:
-    - name: Install Go
-      uses: actions/setup-go@v1
-      with:
-        go-version: ${{ matrix.go-version }}
+      - name: Install Go
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go-version }}
 
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Test
-      run: |
-        make test && make build && make install
+      - name: Test
+        run: |
+          make test && make coverage && make build && make install
