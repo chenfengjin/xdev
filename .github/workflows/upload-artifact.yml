@@ -5,7 +5,7 @@ jobs:
   build-linux-amd64:
     strategy:
       matrix:
-        go-version: [1.15.x]
+        go-version: [1.13.x]
     name: build-linux-amd64
     runs-on: ubuntu-18.04
     steps:
@@ -18,14 +18,11 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
           make
-      - name: Add Release
-        run: |
-          mkdir release && cp -r bin release && cp LICENSE output
 
       - name: Build tar package
         run: |
-          tar zcvf  xdev-linux-amd64.tar.gz release
-      - name: Upload Artificts
+          tar zcvf  xdev-linux-amd64.tar.gz bin LICENSE
+      - name: upload artificts
         uses: actions/upload-artifact@v2
         with:
           name: xdev-linux-amd64.tar.gz
@@ -38,10 +35,6 @@ jobs:
     name: build-darwin-amd64
     runs-on: macos-10.15
     steps:
-      - name: uname
-        run: |
-          uname -a
-
       - name: Install Go
         uses: actions/setup-go@v1
         with:
@@ -51,18 +44,15 @@ jobs:
       - name: Build project
         run: |
           make
-      - name: Add Release
-        run: |
-          mkdir release && cp -r bin release && cp LICENSE output
 
       - name: Build tar package
         run: |
-          tar zcvf  xdev-darwin-amd64.tar.gz release
-      - name: Upload Artificts
+          tar zcvf  xdev-darwin-amd64.tar.gz bin LICENSE
+      - name: upload artificts
         uses: actions/upload-artifact@v2
         with:
-          name: xdev-linux-amd64.tar.gz
-          path: xdev-linux-amd64.tar.gz
+          name: xdev-darwin-amd64.tar.gz
+          path: xdev-darwin-amd64.tar.gz
 
   create_release:
     runs-on: ubuntu-18.04
@@ -85,10 +75,10 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: xuperchain-linux-amd64.tar.gz
+          name: xdev-linux-amd64.tar.gz
       - uses: actions/download-artifact@v2
         with:
-          name: xuperchain-darwin-amd64.tar.gz
+          name: xdev-darwin-amd64.tar.gz
 
       - name: Upload Linux Amd64
         id: upload-linux-amd64
