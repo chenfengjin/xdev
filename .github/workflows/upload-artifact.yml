@@ -1,4 +1,4 @@
-on: workflow_dispatch
+on: create
 
 name: Binary Release
 jobs:
