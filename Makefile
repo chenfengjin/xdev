@@ -11,8 +11,9 @@ install:
 	go install github.com/xuperchain/xdev
 
 test:build
-	bin/xdev build -o testdata/bin/counter-c.wasm testdata/counter.cc
-	bin/xdev test testdata/counter.test.js 
+	go test ./...
+#	bin/xdev build -o testdata/bin/counter-c.wasm testdata/counter.cc
+#	bin/xdev test testdata/counter.test.js 
 lint:
 	go vet ./...
 
