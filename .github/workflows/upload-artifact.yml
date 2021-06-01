@@ -21,7 +21,7 @@ jobs:
 
       - name: Build tar package
         run: |
-          tar zcvf  xdev-linux-amd64-${{github.ref}}.tar.gz bin LICENSE
+          tar zcvf  xdev-linux-amd64-.tar.gz bin LICENSE
       - name: upload artificts
         uses: actions/upload-artifact@v2
         with:
