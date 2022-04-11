@@ -116,7 +116,7 @@ func (r *Runner) makeUsingDocker(mkfile string) error {
 	}
 	runargs = append(runargs, mountpaths...)
 	runargs = append(runargs, r.image)
-	runargs = append(runargs, "emmake", "make", "build", "-f", mkfile)
+	runargs = append(runargs, "emmake", "make", "build", "-j", "4", "-f", mkfile)
 	runargs = append(runargs, r.makeFlags...)
 
 	r.Printf("docker %s", strings.Join(runargs, " "))
@@ -132,7 +132,7 @@ func (r *Runner) makeUsingDocker(mkfile string) error {
 
 func (r *Runner) makeUsingHost(mkfile string) error {
 	runargs := []string{
-		"make", "build", "-f", mkfile,
+		"make", "build", "-j", "4", "-f", mkfile,
 	}
 	runargs = append(runargs, r.makeFlags...)
 	r.Printf("emmake %s", strings.Join(runargs, " "))
