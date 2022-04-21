@@ -5,6 +5,7 @@ go 1.15
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/ddliu/motto v0.3.1
+	github.com/docker/docker v1.4.2-0.20191101170500-ac7306503d23
 	github.com/golang/protobuf v1.4.3
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/robertkrimen/otto v0.0.0-20191219234010-c382bd3c16ff
