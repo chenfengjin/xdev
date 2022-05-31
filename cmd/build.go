@@ -40,6 +40,8 @@ var (
 	debugBuildFlags = []string{
 		"-fsanitize=undefined",
 		"-fsanitize=address",
+		"-fprofile-arcs",
+		"-ftest-coverage",
 		"-O0",
 	}
 	debugLinkFlags = []string{
@@ -48,14 +50,18 @@ var (
 
 		"-s TOTAL_MEMORY=64MB",
 		"-O0",
+		"-fprofile-arcs",
+		"-ftest-coverage",
 		"-s ALLOW_MEMORY_GROWTH=1",
-		"-s MAXIMUM_MEMORY=128MB"}
+		"-s MAXIMUM_MEMORY=128MB",
+	}
 )
 
 var (
 	releaseBuildFlags = []string{"-Os"}
 	releaseLinkFlags  = []string{"-s TOTAL_MEMORY=1MB", "-Oz"}
 )
+
 var (
 	ccImageRelease = "xuper/emcc:0.1.0"
 	ccImageDebug   = "xuper/emcc:llvm_backend"
@@ -134,7 +140,6 @@ func newBuildCommand() *cobra.Command {
 	cmd.Flags().BoolVarP(&c.UsingPrecompiledSDK, "using-precompiled-sdk", "", true, "using precompiled sdk")
 	cmd.Flags().BoolVarP(&c.NoEntry, "no-entry", "", true, "do not output any entry point")
 	cmd.Flags().StringVarP(&c.buildMod, "build-mode", "", buildModeRelease, "build mode, may be debug or release")
-	// cmd.Flags().StringVarP(&c.ccImage, "cc-image", "", ccImageRelease, "")
 	return cmd
 }
 
