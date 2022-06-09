@@ -40,14 +40,18 @@ var (
 	debugBuildFlags = []string{
 		"-fsanitize=undefined",
 		"-fsanitize=address",
+		"-g3",
 		"-O0",
 	}
 	debugLinkFlags = []string{
 		"-fsanitize=undefined",
 		"-fsanitize=address",
+		"-g3",
+		"-gsource-map",
 
 		"-s TOTAL_MEMORY=64MB",
 		"-O0",
+		"--source-map-base http://localhost:9090/",
 		"-s ALLOW_MEMORY_GROWTH=1",
 		"-s MAXIMUM_MEMORY=128MB"}
 )
